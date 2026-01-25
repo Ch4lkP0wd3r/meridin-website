@@ -1,8 +1,10 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Plan } from '../App';
 
 const plans = [
   {
+    id: 'foundation',
     name: "Foundation",
     price: "₹4,999",
     for: "For: Professionals & early-stage teams. Essential visibility and digital protection protocols.",
@@ -14,10 +16,11 @@ const plans = [
       { name: "Crisis Response Support", incl: false },
       { name: "Executive Privacy Protection", incl: false },
     ],
-    btnText: "Select Protocol",
+    btnText: "Add to Engagement",
     delay: '0.1s'
   },
   {
+    id: 'professional',
     name: "Professional",
     price: "₹9,999",
     for: "For: Growing businesses and leadership teams. Advanced monitoring and readiness frameworks.",
@@ -29,11 +32,12 @@ const plans = [
       { name: "Executive Privacy Protection", incl: true },
       { name: "Crisis Response Support", incl: false },
     ],
-    btnText: "Enlist Now",
+    btnText: "Add to Engagement",
     featured: true,
     delay: '0.2s'
   },
   {
+    id: 'enterprise',
     name: "Enterprise",
     price: "₹19,999",
     for: "For: Global organizations and high-risk entities. Comprehensive 24/7 protection suite.",
@@ -45,19 +49,37 @@ const plans = [
       { name: "Executive Privacy Protection", incl: true },
       { name: "Bespoke Intelligence Research", incl: true },
     ],
-    btnText: "Contact for Briefing",
+    btnText: "Add to Engagement",
     delay: '0.3s'
   }
 ];
 
-export const Pricing: React.FC = () => {
+interface PricingProps {
+  onAddToCart: (plan: Plan) => void;
+}
+
+export const Pricing: React.FC<PricingProps> = ({ onAddToCart }) => {
+  const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
+
+  const handleAdd = (p: any) => {
+    onAddToCart({ name: p.name, price: p.price, id: p.id });
+    setAddedIds(prev => new Set(prev).add(p.id));
+    setTimeout(() => {
+      setAddedIds(prev => {
+        const next = new Set(prev);
+        next.delete(p.id);
+        return next;
+      });
+    }, 2000);
+  };
+
   return (
     <section id="pricing" className="py-32 md:py-60 bg-black min-h-screen">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="reveal mb-24 md:mb-40">
           <span className="text-[10px] md:text-[12px] font-bold text-white/30 tracking-intel uppercase block mb-6">Service Plans</span>
           <h2 className="font-serif-luxury text-6xl md:text-9xl text-white mb-6 tracking-tight">Investment</h2>
-          <p className="text-2xl md:text-4xl font-light text-[#555] tracking-tight italic">Select your tier of engagement.</p>
+          <p className="text-2xl md:text-4xl font-light text-[#555] tracking-tight italic">Select your tiers of engagement.</p>
         </div>
 
         <div className="space-y-16 md:space-y-32">
@@ -95,8 +117,16 @@ export const Pricing: React.FC = () => {
               </div>
 
               <div className="pt-10 md:pt-16">
-                <button className={`w-full py-5 md:py-8 rounded-3xl text-[11px] md:text-[13px] font-bold tracking-[0.4em] uppercase transition-all duration-500 ${p.featured ? 'bg-white text-black shadow-[0_30px_60px_rgba(255,255,255,0.1)] hover:bg-zinc-200' : 'bg-[#151515] text-zinc-400 border border-white/5 hover:border-white/20'}`}>
-                  {p.btnText}
+                <button 
+                  onClick={() => handleAdd(p)}
+                  className={`w-full py-5 md:py-8 rounded-3xl text-[11px] md:text-[13px] font-bold tracking-[0.4em] uppercase transition-all duration-500 overflow-hidden relative ${p.featured ? 'bg-white text-black' : 'bg-[#151515] text-zinc-400 border border-white/5 hover:border-white/20'}`}
+                >
+                  <span className={`transition-all duration-500 block ${addedIds.has(p.id) ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}>
+                    {p.btnText}
+                  </span>
+                  <span className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${addedIds.has(p.id) ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                    Staged in Folder
+                  </span>
                 </button>
               </div>
             </div>

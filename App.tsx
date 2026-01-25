@@ -8,11 +8,22 @@ import { Services } from './components/Services';
 import { ReconReports } from './components/ReconReports';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { Checkout } from './components/Checkout';
+import { CartDrawer } from './components/CartDrawer';
 
 export type Page = 'home' | 'pricing' | 'services' | 'contact' | 'free-report';
 
+export interface Plan {
+  name: string;
+  price: string;
+  id: string;
+}
+
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [cart, setCart] = useState<Plan[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   // Reveal On Scroll Logic
   useEffect(() => {
@@ -30,10 +41,26 @@ const App: React.FC = () => {
     return () => observer.disconnect();
   }, [currentPage]);
 
-  // Handle scroll to top on page change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
+
+  const addToCart = (plan: Plan) => {
+    setCart(prev => [...prev, plan]);
+    setIsCartOpen(true);
+  };
+
+  const removeFromCart = (id: string) => {
+    setCart(prev => {
+      const index = prev.findIndex(item => item.id === id);
+      if (index > -1) {
+        const newCart = [...prev];
+        newCart.splice(index, 1);
+        return newCart;
+      }
+      return prev;
+    });
+  };
 
   const renderPage = () => {
     switch (currentPage) {
@@ -47,7 +74,7 @@ const App: React.FC = () => {
       case 'pricing':
         return (
           <div className="animate-fade">
-            <Pricing />
+            <Pricing onAddToCart={addToCart} />
           </div>
         );
       case 'services':
@@ -75,11 +102,34 @@ const App: React.FC = () => {
 
   return (
     <div className="relative bg-[#000000] min-h-screen text-white selection:bg-white selection:text-black">
-      <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
+      <Navigation 
+        currentPage={currentPage} 
+        onNavigate={setCurrentPage} 
+        cartItemCount={cart.length}
+        onOpenCart={() => setIsCartOpen(true)}
+      />
 
       <main>
         {renderPage()}
       </main>
+
+      <CartDrawer 
+        isOpen={isCartOpen} 
+        onClose={() => setIsCartOpen(false)} 
+        items={cart} 
+        onRemove={removeFromCart}
+        onCheckout={() => {
+          setIsCartOpen(false);
+          setIsCheckoutOpen(true);
+        }}
+      />
+
+      {isCheckoutOpen && cart.length > 0 && (
+        <Checkout 
+          plans={cart} 
+          onClose={() => setIsCheckoutOpen(false)} 
+        />
+      )}
 
       <Footer onNavigate={setCurrentPage} />
     </div>

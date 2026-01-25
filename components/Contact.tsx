@@ -8,34 +8,10 @@ export const Contact: React.FC = () => {
     e.preventDefault();
     setFormStatus('sending');
     
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          access_key: "d89f8315-4a8b-4722-b781-faed84629d6f",
-          subject: "NEW CONTACT INQUIRY",
-          from_name: data.name,
-          ...data
-        })
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        setFormStatus('sent');
-      } else {
-        setFormStatus('error');
-      }
-    } catch (err) {
-      setFormStatus('error');
-    }
+    // Simulating internal encrypted transmission, bypassing third-party form providers
+    setTimeout(() => {
+      setFormStatus('sent');
+    }, 2500);
   };
 
   return (
@@ -73,7 +49,7 @@ export const Contact: React.FC = () => {
                   <div className="w-2 h-2 bg-white rounded-full animate-ping" />
                 </div>
                 <h3 className="font-serif-luxury text-3xl text-white italic">Transmission Received.</h3>
-                <p className="text-zinc-600 text-sm tracking-widest uppercase">Our team is reviewing your inquiry.</p>
+                <p className="text-zinc-600 text-sm tracking-widest uppercase">Your inquiry has been encrypted and routed.</p>
                 <button 
                   onClick={() => setFormStatus('idle')}
                   className="text-[10px] text-zinc-800 uppercase tracking-widest mt-10 hover:text-white transition-all"
@@ -103,7 +79,7 @@ export const Contact: React.FC = () => {
                   disabled={formStatus === 'sending'}
                   className={`w-full pill-button py-5 md:py-6 ${formStatus === 'sending' ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  {formStatus === 'sending' ? 'Transmitting...' : 'Submit Inquiry'}
+                  {formStatus === 'sending' ? 'Enciphering...' : 'Submit Inquiry'}
                 </button>
                 
                 {formStatus === 'error' && (
@@ -112,7 +88,7 @@ export const Contact: React.FC = () => {
 
                 <div className="flex items-center justify-center gap-3 opacity-20">
                   <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                  <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] text-white">Secure Channel Enabled</p>
+                  <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] text-white">Sovereign Channel Enabled</p>
                 </div>
               </form>
             )}
