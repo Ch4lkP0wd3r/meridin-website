@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Labs } from './Labs';
 import { motion } from 'framer-motion';
 
 interface HomeSectionsProps {
@@ -217,8 +216,6 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* LABS SECTION */}
-      <Labs />
 
       {/* LEAD MAGNET SECTION (RE-CENTERED) */}
       <section className="max-w-[1300px] mx-auto px-6 md:px-10 text-center">
