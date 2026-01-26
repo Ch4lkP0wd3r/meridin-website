@@ -1,20 +1,25 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Plan } from '../App';
 
 interface CheckoutProps {
-  plan: Plan;
+  items: Plan[];
   onClose: () => void;
 }
 
 type CheckoutStep = 'details' | 'generating' | 'payment_link' | 'error' | 'success';
 
-export const Checkout: React.FC<CheckoutProps> = ({ plan, onClose }) => {
+export const Checkout: React.FC<CheckoutProps> = ({ items, onClose }) => {
   const [step, setStep] = useState<CheckoutStep>('details');
   const [formData, setFormData] = useState({ name: '', email: '', entity: '' });
   const [logs, setLogs] = useState<string[]>([]);
   const [invoiceUrl, setInvoiceUrl] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const totalAmount = useMemo(() =>
+    items.reduce((sum, item) => sum + parseInt(item.price.replace(/[$,]/g, '')), 0),
+    [items]
+  );
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -29,26 +34,25 @@ export const Checkout: React.FC<CheckoutProps> = ({ plan, onClose }) => {
     setLogs(["INITIALIZING SECURE SESSION...", "GENERATING UNIQUE ORDER ID..."]);
 
     const timestamp = new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 14);
-    const orderId = `MERIDIN_${plan.id.toUpperCase()}_${formData.email.split('@')[0].toUpperCase()}_${timestamp}`;
+    const orderId = `MERIDIN_MULTI_${formData.email.split('@')[0].toUpperCase()}_${timestamp}`;
 
     const metadata = {
       user: formData.email,
       userName: formData.name,
       entity: formData.entity,
-      plan: plan.name,
-      planId: plan.id,
-      billing: plan.billingType,
+      items: items.map(i => ({ name: i.name, price: i.price, id: i.id, billing: i.billingType })),
+      total: totalAmount,
       date: new Date().toISOString()
     };
 
-    setLogs(prev => [...prev, `ORDER_ID: ${orderId}`, "STRUCTURING METADATA...", "ESTABLISHING API LINK..."]);
+    setLogs(prev => [...prev, `ORDER_ID: ${orderId}`, "STRUCTURING MULTI-ITEM METADATA...", "ESTABLISHING API LINK..."]);
 
     try {
       const response = await fetch("/api/nowpayments/invoice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          price_amount: parseInt(plan.price.replace(/[$,]/g, '')),
+          price_amount: totalAmount,
           price_currency: "usd",
           order_id: orderId,
           order_description: JSON.stringify(metadata),
@@ -63,7 +67,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ plan, onClose }) => {
         setInvoiceUrl(data.invoice_url);
         setStep('payment_link');
       } else {
-        throw new Error(data.message || "Failed to generate invoice");
+        throw new Error(data.message || "Failed to generate multi-item invoice");
       }
     } catch (err: any) {
       console.error("Invoice generation failed:", err);
@@ -82,7 +86,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ plan, onClose }) => {
           <div className="flex justify-between items-start mb-12 border-b border-white/5 pb-8">
             <div className="space-y-2">
               <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.6em]">Secure Checkout</span>
-              <h3 className="font-serif-luxury text-4xl text-white italic">{plan.name} Access</h3>
+              <h3 className="font-serif-luxury text-4xl text-white italic">Multi-Service Access</h3>
             </div>
             <button onClick={onClose} className="text-zinc-600 hover:text-white transition-colors p-2 text-2xl">&times;</button>
           </div>
@@ -91,26 +95,44 @@ export const Checkout: React.FC<CheckoutProps> = ({ plan, onClose }) => {
             {step === 'details' && (
               <form onSubmit={(e) => { e.preventDefault(); generateInvoice(); }} className="space-y-10 animate-fade">
                 <div className="space-y-8">
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Full Name</label>
-                    <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-transparent border-b border-white/10 py-4 text-white focus:border-white outline-none transition-all placeholder:text-zinc-800 text-xl font-light italic"
-                    />
+                  <div className="bg-white/5 p-6 rounded-2xl border border-white/5 mb-8">
+                    <p className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest mb-4">Items Selection ({items.length})</p>
+                    <div className="space-y-3">
+                      {items.map((item, idx) => (
+                        <div key={idx} className="flex justify-between items-center text-xs">
+                          <span className="text-white italic">{item.name}</span>
+                          <span className="text-zinc-500 font-mono">{item.price}</span>
+                        </div>
+                      ))}
+                      <div className="h-[1px] w-full bg-white/5 mt-4 pt-4 flex justify-between items-center">
+                        <span className="text-[10px] font-bold text-white uppercase tracking-widest">Total</span>
+                        <span className="text-sm font-serif-luxury text-white">${totalAmount.toLocaleString()}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Organization</label>
-                    <input required type="text" placeholder="Entity Name" value={formData.entity} onChange={e => setFormData({ ...formData, entity: e.target.value })}
-                      className="w-full bg-transparent border-b border-white/10 py-4 text-white focus:border-white outline-none transition-all placeholder:text-zinc-800 text-xl font-light italic"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Email Address</label>
-                    <input required type="email" placeholder="email@company.com" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-transparent border-b border-white/10 py-4 text-white focus:border-white outline-none transition-all placeholder:text-zinc-800 text-xl font-light italic"
-                    />
+
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Full Name</label>
+                      <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full bg-transparent border-b border-white/10 py-4 text-white focus:border-white outline-none transition-all placeholder:text-zinc-800 text-xl font-light italic"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Organization</label>
+                      <input required type="text" placeholder="Entity Name" value={formData.entity} onChange={e => setFormData({ ...formData, entity: e.target.value })}
+                        className="w-full bg-transparent border-b border-white/10 py-4 text-white focus:border-white outline-none transition-all placeholder:text-zinc-800 text-xl font-light italic"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Email Address</label>
+                      <input required type="email" placeholder="email@company.com" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full bg-transparent border-b border-white/10 py-4 text-white focus:border-white outline-none transition-all placeholder:text-zinc-800 text-xl font-light italic"
+                      />
+                    </div>
                   </div>
                 </div>
-                <button type="submit" className="w-full pill-button py-6 text-sm">Initialize Payment &rarr;</button>
+                <button type="submit" className="w-full pill-button py-6 text-sm">Initialize Secure Payment &rarr;</button>
               </form>
             )}
 
@@ -140,9 +162,9 @@ export const Checkout: React.FC<CheckoutProps> = ({ plan, onClose }) => {
                   <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
                     <span className="text-white text-3xl">✓</span>
                   </div>
-                  <h4 className="font-serif-luxury text-3xl text-white italic">Invoice Generated</h4>
+                  <h4 className="font-serif-luxury text-3xl text-white italic">Invoice Ready</h4>
                   <p className="text-zinc-500 text-lg font-light leading-relaxed max-w-sm mx-auto">
-                    Your secure payment link for the <span className="text-white font-medium">{plan.name}</span> plan is ready.
+                    Your secure payment link for <span className="text-white font-medium">{items.length} services</span> is active.
                   </p>
                 </div>
 
@@ -155,9 +177,6 @@ export const Checkout: React.FC<CheckoutProps> = ({ plan, onClose }) => {
                   >
                     Pay with Crypto <span className="text-xl transition-transform group-hover:translate-x-2">&rarr;</span>
                   </a>
-                  <p className="text-[10px] text-zinc-700 uppercase tracking-[0.3em]">
-                    Clicking will redirect to NOWPayments Secure Portal
-                  </p>
                 </div>
               </div>
             )}

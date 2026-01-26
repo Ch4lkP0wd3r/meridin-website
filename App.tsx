@@ -25,7 +25,7 @@ export interface Plan {
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
-  const [cartPlan, setCartPlan] = useState<Plan | null>(null);
+  const [cartItems, setCartItems] = useState<Plan[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
@@ -50,12 +50,18 @@ const App: React.FC = () => {
   }, [currentPage]);
 
   const addToCart = (plan: Plan) => {
-    setCartPlan(plan);
+    setCartItems(prev => {
+      // Prevent duplicate plans if it's a monthly subscription
+      if (plan.billingType === 'monthly' && prev.some(item => item.id === plan.id)) {
+        return prev;
+      }
+      return [...prev, plan];
+    });
     setIsCartOpen(true);
   };
 
-  const removeFromCart = () => {
-    setCartPlan(null);
+  const removeFromCart = (id: string, index: number) => {
+    setCartItems(prev => prev.filter((_, i) => i !== index));
   };
 
   const renderPage = () => {
@@ -133,7 +139,7 @@ const App: React.FC = () => {
       <Navigation
         currentPage={currentPage}
         onNavigate={setCurrentPage}
-        cartItemCount={cartPlan ? 1 : 0}
+        cartItemCount={cartItems.length}
         onOpenCart={() => setIsCartOpen(true)}
       />
 
@@ -144,7 +150,7 @@ const App: React.FC = () => {
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
-        item={cartPlan}
+        items={cartItems}
         onRemove={removeFromCart}
         onCheckout={() => {
           setIsCartOpen(false);
@@ -152,9 +158,9 @@ const App: React.FC = () => {
         }}
       />
 
-      {isCheckoutOpen && cartPlan && (
+      {isCheckoutOpen && cartItems.length > 0 && (
         <Checkout
-          plan={cartPlan}
+          items={cartItems}
           onClose={() => setIsCheckoutOpen(false)}
         />
       )}
