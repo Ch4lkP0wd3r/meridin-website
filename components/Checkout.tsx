@@ -7,13 +7,13 @@ interface CheckoutProps {
   onClose: () => void;
 }
 
-type CheckoutStep = 'details' | 'generating' | 'payment_link' | 'error' | 'success';
+type CheckoutStep = 'details' | 'generating' | 'payment_widget' | 'error';
 
 export const Checkout: React.FC<CheckoutProps> = ({ items, onClose }) => {
   const [step, setStep] = useState<CheckoutStep>('details');
   const [formData, setFormData] = useState({ name: '', email: '', entity: '' });
   const [logs, setLogs] = useState<string[]>([]);
-  const [invoiceUrl, setInvoiceUrl] = useState<string | null>(null);
+  const [invoiceId, setInvoiceId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const totalAmount = useMemo(() =>
@@ -63,9 +63,9 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onClose }) => {
 
       const data = await response.json();
 
-      if (response.ok && data.invoice_url) {
-        setInvoiceUrl(data.invoice_url);
-        setStep('payment_link');
+      if (response.ok && data.id) {
+        setInvoiceId(data.id);
+        setStep('payment_widget');
       } else {
         throw new Error(data.message || "Failed to generate multi-item invoice");
       }
@@ -80,13 +80,15 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onClose }) => {
     <div className="fixed inset-0 z-[2000] bg-black/95 backdrop-blur-2xl animate-fade overflow-y-auto py-10 md:py-20 flex justify-center">
       <div className="fixed inset-0 cursor-pointer" onClick={onClose} />
 
-      <div className="relative w-full max-w-2xl bg-[#050505] border border-white/10 rounded-[3rem] shadow-[0_100px_200px_rgba(0,0,0,0.9)] m-auto">
+      <div className={`relative w-full max-w-2xl bg-[#050505] border border-white/10 rounded-[3rem] shadow-[0_100px_200px_rgba(0,0,0,0.9)] m-auto transition-all duration-700 ${step === 'payment_widget' ? 'max-w-3xl lg:max-w-4xl' : ''}`}>
         <div className="p-10 md:p-16 relative z-10">
 
           <div className="flex justify-between items-start mb-12 border-b border-white/5 pb-8">
             <div className="space-y-2">
               <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.6em]">Secure Checkout</span>
-              <h3 className="font-serif-luxury text-4xl text-white italic">Multi-Service Access</h3>
+              <h3 className="font-serif-luxury text-4xl text-white italic">
+                {step === 'payment_widget' ? 'Complete Payment' : 'Protocol Access'}
+              </h3>
             </div>
             <button onClick={onClose} className="text-zinc-600 hover:text-white transition-colors p-2 text-2xl">&times;</button>
           </div>
@@ -132,7 +134,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onClose }) => {
                     </div>
                   </div>
                 </div>
-                <button type="submit" className="w-full pill-button py-6 text-sm">Initialize Secure Payment &rarr;</button>
+                <button type="submit" className="w-full pill-button py-6 text-sm">Initialize Secure Protocol &rarr;</button>
               </form>
             )}
 
@@ -156,28 +158,17 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onClose }) => {
               </div>
             )}
 
-            {step === 'payment_link' && (
-              <div className="text-center space-y-10 animate-fade">
-                <div className="space-y-6">
-                  <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-white text-3xl">✓</span>
-                  </div>
-                  <h4 className="font-serif-luxury text-3xl text-white italic">Invoice Ready</h4>
-                  <p className="text-zinc-500 text-lg font-light leading-relaxed max-w-sm mx-auto">
-                    Your secure payment link for <span className="text-white font-medium">{items.length} services</span> is active.
-                  </p>
-                </div>
-
-                <div className="space-y-6 pt-4">
-                  <a
-                    href={invoiceUrl || '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full pill-button py-6 text-sm flex items-center justify-center gap-4 group"
-                  >
-                    Pay with Crypto <span className="text-xl transition-transform group-hover:translate-x-2">&rarr;</span>
-                  </a>
-                </div>
+            {step === 'payment_widget' && invoiceId && (
+              <div className="w-full flex justify-center animate-fade">
+                <iframe
+                  src={`https://nowpayments.io/embed/payment-widget?iid=${invoiceId}`}
+                  width="100%"
+                  height="650px"
+                  frameBorder="0"
+                  scrolling="no"
+                  style={{ borderRadius: '2rem', background: 'transparent' }}
+                  title="NOWPayments Widget"
+                />
               </div>
             )}
 
@@ -187,12 +178,12 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onClose }) => {
                   <span className="text-red-500 text-3xl">!</span>
                 </div>
                 <div className="space-y-4">
-                  <h4 className="font-serif-luxury text-3xl text-white italic">Generation Failed.</h4>
+                  <h4 className="font-serif-luxury text-3xl text-white italic">Protocol Interruption.</h4>
                   <p className="text-zinc-500 text-sm leading-relaxed max-w-sm mx-auto">
-                    {errorMessage || "We could not establish a connection to the payment gateway."}
+                    {errorMessage || "We could not establish a connection to the encryption gateway."}
                   </p>
                 </div>
-                <button onClick={() => setStep('details')} className="text-[10px] uppercase tracking-widest text-zinc-700 hover:text-white block mx-auto pt-6">Back to Details</button>
+                <button onClick={() => setStep('details')} className="text-[10px] uppercase tracking-widest text-zinc-700 hover:text-white block mx-auto pt-6">Retry Initiation</button>
               </div>
             )}
           </div>
