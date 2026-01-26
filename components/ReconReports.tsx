@@ -27,7 +27,7 @@ export const ReconReports: React.FC = () => {
     const body = encodeURIComponent(
       `Organization: ${regData.name}\nWebsite: ${regData.url}\nEmail: ${regData.email}\n\nI would like to request a free security audit for my organization.`
     );
-    window.location.href = `mailto:meridin.co@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:support@meridin.co.in?subject=${subject}&body=${body}`;
     setStep('confirmed');
   };
 
@@ -95,7 +95,7 @@ export const ReconReports: React.FC = () => {
             <div className="pt-8 flex flex-wrap justify-center lg:justify-start gap-x-12 gap-y-6 items-center border-t border-white/5 w-fit">
               <div className="flex flex-col gap-1">
                 <span className="text-[8px] font-bold text-white/20 uppercase tracking-[0.4em]">Email Support</span>
-                <span className="text-white/60 text-[10px] font-mono">meridin.co@gmail.com</span>
+                <span className="text-white/60 text-[10px] font-mono">support@meridin.co.in</span>
               </div>
               <div className="flex flex-col gap-1">
                 <span className="text-[8px] font-bold text-white/20 uppercase tracking-[0.4em]">Status</span>

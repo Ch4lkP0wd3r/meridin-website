@@ -14,7 +14,7 @@ export const Contact: React.FC = () => {
     formData.append("_template", "box");
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/meridin.co@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/support@meridin.co.in", {
         method: "POST",
         body: formData
       });
@@ -43,18 +43,18 @@ export const Contact: React.FC = () => {
               </h2>
             </div>
 
-            <p className="text-[#888] font-light text-lg md:text-xl leading-relaxed max-w-sm mx-auto lg:mx-0">
-              We look forward to hearing from you. All messages are reviewed locally by our team to provide the best support.
+            <p className="text-[#888] font-light text-lg md:text-xl leading-relaxed max-w-sm mx-auto lg:mx-0 italic">
+              "We operate exclusively in digital assets. All consultations and services are transacted via secure cryptocurrency protocols."
             </p>
 
             <div className="space-y-8 md:space-y-10 pt-8 md:pt-10 border-t border-white/5">
               <div className="flex flex-col space-y-1 md:space-y-2">
                 <span className="text-[9px] md:text-[10px] text-[#444] uppercase tracking-widest font-bold">General Support</span>
-                <span className="text-white font-medium text-base md:text-lg">meridin.co@gmail.com</span>
+                <span className="text-white font-medium text-base md:text-lg">support@meridin.co.in</span>
               </div>
               <div className="flex flex-col space-y-1 md:space-y-2">
-                <span className="text-[9px] md:text-[10px] text-[#444] uppercase tracking-widest font-bold">Direct Email</span>
-                <span className="text-white font-medium text-base md:text-lg italic">meridin.co@gmail.com</span>
+                <span className="text-[9px] md:text-[10px] text-[#444] uppercase tracking-widest font-bold">Protocol Inquiries</span>
+                <span className="text-white font-medium text-base md:text-lg italic">support@meridin.co.in</span>
               </div>
             </div>
           </div>
@@ -101,9 +101,9 @@ export const Contact: React.FC = () => {
                   <p className="text-red-900/60 text-[10px] uppercase text-center tracking-widest">An error occurred. Please try again.</p>
                 )}
 
-                <div className="flex items-center justify-center gap-3 opacity-20">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                  <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] text-white">Direct Channel Active</p>
+                <div className="flex items-center justify-center gap-3 opacity-30">
+                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
+                  <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] text-white">Cryptographic Channel Only</p>
                 </div>
               </form>
             )}
