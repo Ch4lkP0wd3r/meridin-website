@@ -80,7 +80,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
               onClick={onOpenCart}
               className="relative p-2 group"
             >
-              <div className="text-[10px] font-bold text-white/40 group-hover:text-white transition-colors uppercase tracking-widest hidden md:block mr-8">Intelligence Selection</div>
+              <div className="text-[10px] font-bold text-white/40 group-hover:text-white transition-colors uppercase tracking-widest hidden md:block mr-8">Your Cart</div>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center">
                 <AnimatePresence mode="popLayout">
                   <motion.div
@@ -99,7 +99,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
               onClick={() => onNavigate('contact')}
               className="pill-button px-6 py-3 text-[9px] md:text-[10px] hidden sm:block"
             >
-              Request Access
+              Buy Now!
             </button>
           </div>
         </div>
