@@ -52,7 +52,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
             />
           </motion.div>
-          <span className="font-serif-luxury text-lg md:text-xl text-white tracking-tight hidden sm:block">Meridin & Co.™</span>
+          <span className="font-serif-luxury text-lg md:text-xl text-white tracking-tight hidden sm:block">Meridin & Co.<sup>™</sup></span>
         </div>
 
         <div className="flex items-center gap-4 md:gap-10">

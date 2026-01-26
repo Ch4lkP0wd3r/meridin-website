@@ -20,7 +20,7 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onNavigate }) => {
             className="space-y-8 md:space-y-12"
           >
             <div className="space-y-3">
-              <h3 className="font-serif-luxury text-2xl md:text-4xl text-white tracking-tight">Meridin & Co™</h3>
+              <h3 className="font-serif-luxury text-2xl md:text-4xl text-white tracking-tight">Meridin & Co<sup>™</sup></h3>
               <div className="h-[1px] w-16 bg-white/20" />
               <p className="text-lg md:text-xl font-medium text-[#666] tracking-tight">Intelligence Oversight</p>
             </div>
@@ -32,7 +32,7 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onNavigate }) => {
 
             <div className="pt-4 group">
               <p className="font-serif-luxury italic text-xl md:text-2xl text-white group-hover:pl-4 transition-all duration-500">Dhairya Singh</p>
-              <p className="text-[9px] md:text-[10px] font-bold text-[#555] uppercase tracking-intel mt-2">Founder & CEO, Meridin & Co™</p>
+              <p className="text-[9px] md:text-[10px] font-bold text-[#555] uppercase tracking-intel mt-2">Founder & CEO, Meridin & Co<sup>™</sup></p>
             </div>
           </motion.div>
 

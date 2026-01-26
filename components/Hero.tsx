@@ -88,7 +88,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <h1 className="font-serif-luxury text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter text-white leading-[0.9] drop-shadow-2xl">
-            Meridin & Co™
+            Meridin & Co<sup>™</sup>
           </h1>
         </motion.div>
 

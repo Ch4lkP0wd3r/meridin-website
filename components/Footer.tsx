@@ -16,7 +16,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               alt="Meridin Logo"
               className="w-12 h-12 md:w-16 md:h-16 object-contain transition-transform duration-700 group-hover:scale-110"
             />
-            <span className="font-serif-luxury text-xl md:text-2xl text-white">Meridin & Co.™</span>
+            <span className="font-serif-luxury text-xl md:text-2xl text-white">Meridin & Co.<sup>™</sup></span>
           </div>
           <p className="text-zinc-600 text-xs md:text-sm font-medium leading-relaxed max-w-xs uppercase tracking-[0.2em]">
             Professional security services for organizations and individuals. Practical solutions for modern information protection.
@@ -37,7 +37,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       </div>
 
       <div className="max-w-[1400px] mx-auto mt-16 md:mt-24 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8 opacity-40">
-        <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] text-center md:text-left">© {new Date().getFullYear()} Meridin & Co.™ Security Services.</p>
+        <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] text-center md:text-left">© {new Date().getFullYear()} Meridin & Co.<sup>™</sup> Security Services.</p>
       </div>
     </footer>
   );
