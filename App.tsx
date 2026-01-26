@@ -12,6 +12,7 @@ import { Checkout } from './components/Checkout';
 import { CartDrawer } from './components/CartDrawer';
 import { Marketplace } from './components/Marketplace';
 import { Labs } from './components/Labs';
+import { NotFoundError } from './components/NotFoundError';
 
 export type Page = 'home' | 'pricing' | 'services' | 'contact' | 'free-report' | 'marketplace' | 'payment-success' | 'payment-cancel';
 
@@ -111,7 +112,7 @@ const App: React.FC = () => {
             </div>
             <h2 className="font-serif-luxury text-4xl md:text-6xl text-white italic mb-4">Transaction Confirmed.</h2>
             <p className="text-zinc-500 text-lg md:text-xl font-light max-w-lg mb-12 italic">
-              Thank you for trusting Meridin & Co™. Your secure intelligence setup is now underway. Our team will contact you shortly.
+              Thank you for trusting Meridin & Co<sup>™</sup>. Your secure intelligence setup is now underway. Our team will contact you shortly.
             </p>
             <button onClick={() => setCurrentPage('home')} className="pill-button px-12 py-5">Return Home &rarr;</button>
           </div>
@@ -130,7 +131,7 @@ const App: React.FC = () => {
           </div>
         );
       default:
-        return <Hero onNavigate={setCurrentPage} />;
+        return <NotFoundError onNavigate={setCurrentPage} />;
     }
   };
 

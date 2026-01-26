@@ -45,6 +45,9 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onNavigate }) => {
           >
             <img
               src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200"
+              width="1200"
+              height="800"
+              loading="lazy"
               className="w-full aspect-video md:aspect-[5/4] object-cover opacity-60 grayscale hover:scale-110 transition-transform duration-[4s]"
               alt="Meridin Intelligence HQ"
             />

@@ -49,6 +49,8 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
             <img
               src="https://i.postimg.cc/Bvfb3nW4/logo-no-bg.png"
               alt="Meridin Logo"
+              width="48"
+              height="48"
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
             />
           </motion.div>

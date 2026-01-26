@@ -14,6 +14,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <img
               src="https://i.postimg.cc/Bvfb3nW4/logo-no-bg.png"
               alt="Meridin Logo"
+              width="64"
+              height="64"
               className="w-12 h-12 md:w-16 md:h-16 object-contain transition-transform duration-700 group-hover:scale-110"
             />
             <span className="font-serif-luxury text-xl md:text-2xl text-white">Meridin & Co.<sup>™</sup></span>
