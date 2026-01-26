@@ -1,171 +1,304 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meridin & Co™ | Global Cyber Intelligence</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg-main: #000000;
-        --text-primary: #ffffff;
-        --text-secondary: #999999;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: var(--bg-main);
-        color: var(--text-primary);
-        font-family: 'Inter', sans-serif;
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-        line-height: 1.6;
-      }
-      .font-serif-luxury { 
-        font-family: 'Playfair Display', serif; 
-        font-display: swap;
-      }
-      
-      h1, h2, h3, h4 {
-        letter-spacing: -0.02em;
-      }
 
-      .tracking-intel {
-        letter-spacing: 0.4em;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      ::-webkit-scrollbar { width: 5px; }
-      ::-webkit-scrollbar-track { background: #000; }
-      ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
-      
-      .pill-button {
-        background: white;
-        color: black;
-        border-radius: 9999px;
-        padding: 12px 32px;
-        font-weight: 600;
-        font-size: 13px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .pill-button:hover {
-        transform: translateY(-4px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
-      }
+  <!-- Technical SEO -->
+  <title>Meridin & Co™ | Global Cyber Intelligence & Professional Security Services</title>
+  <meta name="description"
+    content="Meridin & Co™ provides world-class cyber intelligence, private security audits, and specialized digital protection for high-value organizations and individuals. Global reach, absolute discretion.">
+  <meta name="keywords"
+    content="cyber security, intelligence agency, private security audit, digital footprint, OSINT, infrastructure review, privacy protection, Meridin & Co">
+  <link rel="canonical" href="https://meridin.co/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-      /* Cinematic Reveal Animations */
-      .reveal {
+  <!-- Open Graph / Social Media -->
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Meridin & Co™ | Global Cyber Intelligence" />
+  <meta property="og:description"
+    content="Professional intelligence and security services for the discerning elite. Secure your digital perimeter today." />
+  <meta property="og:url" content="https://meridin.co/" />
+  <meta property="og:site_name" content="Meridin & Co™" />
+  <meta property="og:image" content="https://i.postimg.cc/Bvfb3nW4/logo-no-bg.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@MeridinCo" />
+  <meta name="twitter:title" content="Meridin & Co™ | Global Cyber Intelligence" />
+  <meta name="twitter:description"
+    content="Professional security services for high-net-worth organizations and individuals." />
+  <meta name="twitter:image" content="https://i.postimg.cc/Bvfb3nW4/logo-no-bg.png" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Meridin & Co™",
+    "url": "https://meridin.co/",
+    "logo": "https://i.postimg.cc/Bvfb3nW4/logo-no-bg.png",
+    "description": "Premium cyber intelligence and digital security consultancy.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "meridin.co@gmail.com",
+      "contactType": "customer support"
+    },
+    "sameAs": [
+      "https://twitter.com/MeridinCo",
+      "https://linkedin.com/company/meridin-co"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Cyber Intelligence",
+    "provider": {
+      "@type": "Organization",
+      "name": "Meridin & Co™"
+    },
+    "areaServed": "Global",
+    "description": "Professional security audits, digital footprint analysis, and infrastructure monitoring."
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      font-display: swap;
+    }
+  </style>
+  <style>
+    :root {
+      --bg-main: #000000;
+      --text-primary: #ffffff;
+      --text-secondary: #999999;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    .font-serif-luxury {
+      font-family: 'Playfair Display', serif;
+      font-display: swap;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      letter-spacing: -0.02em;
+    }
+
+    .tracking-intel {
+      letter-spacing: 0.4em;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #222;
+      border-radius: 10px;
+    }
+
+    .pill-button {
+      background: white;
+      color: black;
+      border-radius: 9999px;
+      padding: 12px 32px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pill-button:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
+    }
+
+    /* Cinematic Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      filter: blur(10px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity, filter;
+    }
+
+    .reveal.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .price-card {
+      background: #0f0f0f;
+      border-radius: 24px;
+      border: 1px solid #1a1a1a;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .price-card:hover {
+      border-color: #444;
+      transform: translateY(-8px);
+      background: #111;
+    }
+
+    .checkmark {
+      color: #4ade80;
+    }
+
+    .cross {
+      color: #333333;
+    }
+
+    @keyframes fadeIn {
+      from {
         opacity: 0;
-        transform: translateY(40px);
-        filter: blur(10px);
-        transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                    filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform, opacity, filter;
+        transform: translateY(15px);
       }
-      .reveal.is-revealed {
+
+      to {
         opacity: 1;
         transform: translateY(0);
-        filter: blur(0);
+      }
+    }
+
+    .animate-fade {
+      animation: fadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Animated Background Elements */
+    @keyframes drift {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0);
+        opacity: 0;
       }
 
-      .price-card {
-        background: #0f0f0f;
-        border-radius: 24px;
-        border: 1px solid #1a1a1a;
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .price-card:hover {
-        border-color: #444;
-        transform: translateY(-8px);
-        background: #111;
+      20% {
+        opacity: 0.3;
       }
 
-      .checkmark { color: #4ade80; }
-      .cross { color: #333333; }
-
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(15px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .animate-fade {
-        animation: fadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      80% {
+        opacity: 0.3;
       }
 
-      /* Animated Background Elements */
-      @keyframes drift {
-        0% { transform: translateY(0) translateX(0) rotate(0); opacity: 0; }
-        20% { opacity: 0.3; }
-        80% { opacity: 0.3; }
-        100% { transform: translateY(-120px) translateX(30px) rotate(360deg); opacity: 0; }
+      100% {
+        transform: translateY(-120px) translateX(30px) rotate(360deg);
+        opacity: 0;
       }
-      .particle {
-        position: absolute;
-        background: white;
-        border-radius: 1px;
-        pointer-events: none;
-        animation: drift infinite linear;
+    }
+
+    .particle {
+      position: absolute;
+      background: white;
+      border-radius: 1px;
+      pointer-events: none;
+      animation: drift infinite linear;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        opacity: 0.2;
+        transform: scale(1);
       }
 
-      @keyframes pulseGlow {
-        0%, 100% { opacity: 0.2; transform: scale(1); }
-        50% { opacity: 0.4; transform: scale(1.15); }
+      50% {
+        opacity: 0.4;
+        transform: scale(1.15);
       }
-      .glow-blob {
-        position: absolute;
-        width: 800px;
-        height: 800px;
-        background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
-        filter: blur(100px);
-        pointer-events: none;
-        animation: pulseGlow 20s infinite ease-in-out;
-        will-change: transform;
-      }
+    }
 
-      .scanline {
-        width: 100%;
-        height: 100px;
-        z-index: 5;
-        background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.01) 50%, rgba(255,255,255,0) 100%);
-        opacity: 0.1;
-        position: absolute;
+    .glow-blob {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+      animation: pulseGlow 20s infinite ease-in-out;
+      will-change: transform;
+    }
+
+    .scanline {
+      width: 100%;
+      height: 100px;
+      z-index: 5;
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0) 100%);
+      opacity: 0.1;
+      position: absolute;
+      bottom: 100%;
+      animation: scanline 10s linear infinite;
+    }
+
+    @keyframes scanline {
+      0% {
         bottom: 100%;
-        animation: scanline 10s linear infinite;
-      }
-      @keyframes scanline {
-        0% { bottom: 100%; }
-        100% { bottom: -100px; }
       }
 
-      .noise-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        opacity: 0.03;
-        pointer-events: none;
-        z-index: 10000;
+      100% {
+        bottom: -100px;
       }
-      
-      .custom-scrollbar::-webkit-scrollbar {
-        width: 3px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.1);
-        border-radius: 10px;
-      }
-    </style>
-    <script type="importmap">
+    }
+
+    .noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 10000;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+  </style>
+  <script type="importmap">
     {
       "imports": {
         "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
@@ -176,9 +309,12 @@
       }
     }
     </script>
-  </head>
-  <body>
-    <div class="noise-overlay"></div>
-    <div id="root"></div>
-  </body>
+</head>
+
+<body>
+  <div class="noise-overlay"></div>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>

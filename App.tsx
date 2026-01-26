@@ -10,18 +10,22 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { Checkout } from './components/Checkout';
 import { CartDrawer } from './components/CartDrawer';
+import { Marketplace } from './components/Marketplace';
+import { Labs } from './components/Labs';
 
-export type Page = 'home' | 'pricing' | 'services' | 'contact' | 'free-report';
+export type Page = 'home' | 'pricing' | 'services' | 'contact' | 'free-report' | 'marketplace' | 'payment-success' | 'payment-cancel';
 
 export interface Plan {
   name: string;
   price: string;
   id: string;
+  billingType: 'monthly' | 'one-time';
+  widgetId?: string;
 }
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
-  const [cart, setCart] = useState<Plan[]>([]);
+  const [cartPlan, setCartPlan] = useState<Plan | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
@@ -46,20 +50,12 @@ const App: React.FC = () => {
   }, [currentPage]);
 
   const addToCart = (plan: Plan) => {
-    setCart(prev => [...prev, plan]);
+    setCartPlan(plan);
     setIsCartOpen(true);
   };
 
-  const removeFromCart = (id: string) => {
-    setCart(prev => {
-      const index = prev.findIndex(item => item.id === id);
-      if (index > -1) {
-        const newCart = [...prev];
-        newCart.splice(index, 1);
-        return newCart;
-      }
-      return prev;
-    });
+  const removeFromCart = () => {
+    setCartPlan(null);
   };
 
   const renderPage = () => {
@@ -80,7 +76,7 @@ const App: React.FC = () => {
       case 'services':
         return (
           <div className="animate-fade">
-            <Services />
+            <Services onNavigate={setCurrentPage} />
           </div>
         );
       case 'free-report':
@@ -89,10 +85,42 @@ const App: React.FC = () => {
             <ReconReports />
           </div>
         );
+      case 'marketplace':
+        return (
+          <div className="animate-fade">
+            <Marketplace onAddToCart={addToCart} />
+          </div>
+        );
       case 'contact':
         return (
           <div className="animate-fade">
             <Contact />
+          </div>
+        );
+      case 'payment-success':
+        return (
+          <div className="animate-fade min-h-[80vh] flex flex-col items-center justify-center text-center px-6">
+            <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mb-8">
+              <span className="text-white text-3xl">✓</span>
+            </div>
+            <h2 className="font-serif-luxury text-4xl md:text-6xl text-white italic mb-4">Transaction Confirmed.</h2>
+            <p className="text-zinc-500 text-lg md:text-xl font-light max-w-lg mb-12 italic">
+              Thank you for trusting Meridin & Co™. Your secure intelligence setup is now underway. Our team will contact you shortly.
+            </p>
+            <button onClick={() => setCurrentPage('home')} className="pill-button px-12 py-5">Return Home &rarr;</button>
+          </div>
+        );
+      case 'payment-cancel':
+        return (
+          <div className="animate-fade min-h-[80vh] flex flex-col items-center justify-center text-center px-6">
+            <div className="w-20 h-20 bg-red-900/10 border border-red-500/20 rounded-full flex items-center justify-center mb-8">
+              <span className="text-red-500 text-3xl">!</span>
+            </div>
+            <h2 className="font-serif-luxury text-4xl md:text-6xl text-white italic mb-4">Process Aborted.</h2>
+            <p className="text-zinc-500 text-lg md:text-xl font-light max-w-lg mb-12 italic">
+              The payment process was cancelled. No charges were made. If you need assistance, please contact our support team.
+            </p>
+            <button onClick={() => setCurrentPage('home')} className="pill-button px-12 py-5 bg-transparent border border-white/20 text-white">Return Home &rarr;</button>
           </div>
         );
       default:
@@ -102,10 +130,10 @@ const App: React.FC = () => {
 
   return (
     <div className="relative bg-[#000000] min-h-screen text-white selection:bg-white selection:text-black">
-      <Navigation 
-        currentPage={currentPage} 
-        onNavigate={setCurrentPage} 
-        cartItemCount={cart.length}
+      <Navigation
+        currentPage={currentPage}
+        onNavigate={setCurrentPage}
+        cartItemCount={cartPlan ? 1 : 0}
         onOpenCart={() => setIsCartOpen(true)}
       />
 
@@ -113,10 +141,10 @@ const App: React.FC = () => {
         {renderPage()}
       </main>
 
-      <CartDrawer 
-        isOpen={isCartOpen} 
-        onClose={() => setIsCartOpen(false)} 
-        items={cart} 
+      <CartDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        item={cartPlan}
         onRemove={removeFromCart}
         onCheckout={() => {
           setIsCartOpen(false);
@@ -124,10 +152,10 @@ const App: React.FC = () => {
         }}
       />
 
-      {isCheckoutOpen && cart.length > 0 && (
-        <Checkout 
-          plans={cart} 
-          onClose={() => setIsCheckoutOpen(false)} 
+      {isCheckoutOpen && cartPlan && (
+        <Checkout
+          plan={cartPlan}
+          onClose={() => setIsCheckoutOpen(false)}
         />
       )}
 
