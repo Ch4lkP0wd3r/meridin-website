@@ -113,7 +113,14 @@ export const ReconReports: React.FC = () => {
                 {step === 'intro' && (
                   <div className="text-center space-y-12 animate-fade">
                     <div className="space-y-6">
-                      <img src="https://i.postimg.cc/Bvfb3nW4/logo-no-bg.png" className="w-16 h-16 mx-auto brightness-150 opacity-40 mb-6" alt="Meridin Logo" />
+                      <img
+                        src="https://i.postimg.cc/Bvfb3nW4/logo-no-bg.png"
+                        className="w-16 h-16 mx-auto brightness-150 opacity-40 mb-6"
+                        alt="Meridin Logo"
+                        width="64"
+                        height="64"
+                        loading="lazy"
+                      />
                       <h3 className="font-serif-luxury text-3xl text-white italic tracking-tight">Security Audit Request</h3>
                       <p className="text-zinc-600 text-[10px] tracking-[0.5em] uppercase font-bold">Please provide your details</p>
                     </div>
@@ -253,7 +260,14 @@ export const ReconReports: React.FC = () => {
                 {step === 'confirmed' && (
                   <div className="space-y-12 animate-fade">
                     <div className="text-center space-y-6">
-                      <img src="https://i.postimg.cc/Bvfb3nW4/logo-no-bg.png" className="w-16 h-16 mx-auto brightness-150 opacity-40 mb-6" alt="Meridin Logo" />
+                      <img
+                        src="https://i.postimg.cc/Bvfb3nW4/logo-no-bg.png"
+                        className="w-16 h-16 mx-auto brightness-150 opacity-40 mb-6"
+                        alt="Meridin Logo"
+                        width="64"
+                        height="64"
+                        loading="lazy"
+                      />
                       <h4 className="text-white font-serif-luxury text-2xl italic">Request Received.</h4>
                       <p className="text-zinc-400 text-base leading-relaxed font-light italic">
                         Thank you. Your request for <span className="text-white">{regData.name}</span> has been received. Our team will review the details and contact you soon.
