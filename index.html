@@ -85,229 +85,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap&display=swap"
     rel="stylesheet">
-  <style>
-    :root {
-      font-display: swap;
-    }
-  </style>
-  <style>
-    :root {
-      --bg-main: #000000;
-      --text-primary: #ffffff;
-      --text-secondary: #999999;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg-main);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.6;
-    }
-
-    .font-serif-luxury {
-      font-family: 'Playfair Display', serif;
-      font-display: swap;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4 {
-      letter-spacing: -0.02em;
-    }
-
-    .tracking-intel {
-      letter-spacing: 0.4em;
-    }
-
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #000;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #222;
-      border-radius: 10px;
-    }
-
-    .pill-button {
-      background: white;
-      color: black;
-      border-radius: 9999px;
-      padding: 12px 32px;
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .pill-button:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
-    }
-
-    /* Cinematic Reveal Animations */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      filter: blur(10px);
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform, opacity, filter;
-    }
-
-    .reveal.is-revealed {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
-
-    .price-card {
-      background: #0f0f0f;
-      border-radius: 24px;
-      border: 1px solid #1a1a1a;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .price-card:hover {
-      border-color: #444;
-      transform: translateY(-8px);
-      background: #111;
-    }
-
-    .checkmark {
-      color: #4ade80;
-    }
-
-    .cross {
-      color: #333333;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate-fade {
-      animation: fadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    /* Animated Background Elements */
-    @keyframes drift {
-      0% {
-        transform: translateY(0) translateX(0) rotate(0);
-        opacity: 0;
-      }
-
-      20% {
-        opacity: 0.3;
-      }
-
-      80% {
-        opacity: 0.3;
-      }
-
-      100% {
-        transform: translateY(-120px) translateX(30px) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .particle {
-      position: absolute;
-      background: white;
-      border-radius: 1px;
-      pointer-events: none;
-      animation: drift infinite linear;
-    }
-
-    @keyframes pulseGlow {
-
-      0%,
-      100% {
-        opacity: 0.2;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.4;
-        transform: scale(1.15);
-      }
-    }
-
-    .glow-blob {
-      position: absolute;
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
-      filter: blur(100px);
-      pointer-events: none;
-      animation: pulseGlow 20s infinite ease-in-out;
-      will-change: transform;
-    }
-
-    .scanline {
-      width: 100%;
-      height: 100px;
-      z-index: 5;
-      background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0) 100%);
-      opacity: 0.1;
-      position: absolute;
-      bottom: 100%;
-      animation: scanline 10s linear infinite;
-    }
-
-    @keyframes scanline {
-      0% {
-        bottom: 100%;
-      }
-
-      100% {
-        bottom: -100px;
-      }
-    }
-
-    .noise-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      pointer-events: none;
-      z-index: 10000;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="/index.css">
   <script type="importmap">
     {
       "imports": {
@@ -322,12 +100,22 @@
 </head>
 
 <body>
-  <h1
-    style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;">
-    Meridin & Co™ | Elite Cyber Intelligence & Security
-  </h1>
-  <div class="noise-overlay"></div>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Semantic Pre-Hydration Content for SEO -->
+    <section>
+      <h2>Elite Cybersecurity & Intelligence Consultancy</h2>
+      <p>Meridin & Co™ provides world-class cyber intelligence, private infrastructure audits, and specialized digital
+        protection for high-value organizations and individuals. Our solutions are designed for those who require
+        absolute discretion and technical excellence.</p>
+      <ul>
+        <li>Strategic Risk Intelligence & Mitigation</li>
+        <li>High-Assurance Infrastructure Audits</li>
+        <li>Executive Privacy & Digital Stealth</li>
+      </ul>
+      <p>Contact us at support@meridin.co.in for professional security inquiries. Secure your digital perimeter today.
+      </p>
+    </section>
+  </div>
   <script type="module" src="/index.tsx"></script>
 </body>
 
