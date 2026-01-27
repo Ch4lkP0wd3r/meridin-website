@@ -80,10 +80,10 @@ export const ReconReports: React.FC = () => {
                 <span className="h-[1px] w-12 bg-white/20" />
                 <span className="text-[10px] md:text-[11px] font-bold text-white/40 tracking-widest uppercase block">Audit Request</span>
               </div>
-              <h2 className="font-serif-luxury text-5xl md:text-7xl lg:text-8xl text-white tracking-tighter leading-[0.8] mb-4">
+              <h1 className="font-serif-luxury text-5xl md:text-7xl lg:text-8xl text-white tracking-tighter leading-[0.8] mb-4">
                 {step === 'confirmed' ? 'Request' : 'Security'} <br />
                 <span className="italic font-light opacity-30">{step === 'confirmed' ? 'Received.' : 'Audit.'}</span>
-              </h2>
+              </h1>
             </div>
 
             <p className="text-[#555] text-lg md:text-2xl font-light leading-relaxed italic max-w-xl mx-auto lg:mx-0">

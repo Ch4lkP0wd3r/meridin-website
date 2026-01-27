@@ -50,9 +50,9 @@ export const Services: React.FC<ServicesProps> = ({ onNavigate }) => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="reveal mb-16 md:mb-32 border-l border-white/10 pl-8 md:pl-16">
           <span className="text-[10px] md:text-[11px] font-bold text-white/30 tracking-widest uppercase block mb-6">Service List</span>
-          <h2 className="font-serif-luxury text-5xl md:text-7xl text-white tracking-tighter leading-[0.85] mb-8">
+          <h1 className="font-serif-luxury text-5xl md:text-7xl text-white tracking-tighter leading-[0.85] mb-8">
             Our <br /><span className="italic opacity-30">Services.</span>
-          </h2>
+          </h1>
           <p className="text-lg md:text-2xl text-zinc-600 font-light max-w-2xl italic leading-relaxed">
             Professional security services to help you protect your digital information and infrastructure.
           </p>

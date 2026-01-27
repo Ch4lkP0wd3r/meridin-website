@@ -38,9 +38,9 @@ export const Contact: React.FC = () => {
           <div className="space-y-12 md:space-y-16 text-center lg:text-left">
             <div className="space-y-4 md:space-y-6">
               <span className="text-[10px] md:text-[11px] font-bold text-white/30 tracking-widest uppercase block">Contact</span>
-              <h2 className="font-serif-luxury text-5xl md:text-6xl text-white tracking-tight leading-none italic">
+              <h1 className="font-serif-luxury text-5xl md:text-6xl text-white tracking-tight leading-none italic">
                 Get in <br />Touch.
-              </h2>
+              </h1>
             </div>
 
             <p className="text-[#888] font-light text-lg md:text-xl leading-relaxed max-w-sm mx-auto lg:mx-0 italic">

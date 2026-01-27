@@ -84,7 +84,7 @@ export const Pricing: React.FC<PricingProps> = ({ onAddToCart }) => {
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         <div className="reveal mb-16 md:mb-32">
           <span className="text-[10px] md:text-[11px] font-bold text-white/30 tracking-widest uppercase block mb-6">Security Plans</span>
-          <h2 className="font-serif-luxury text-5xl md:text-7xl text-white mb-4 tracking-tight">Support.</h2>
+          <h1 className="font-serif-luxury text-5xl md:text-7xl text-white mb-4 tracking-tight">Support.</h1>
           <p className="text-xl md:text-2xl font-light text-[#555] tracking-tight italic">Select a security plan. All transactions via crypto.</p>
         </div>
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://meridin.co/sitemap.xml
+Sitemap: https://meridin.co.in/sitemap.xml
