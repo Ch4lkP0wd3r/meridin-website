@@ -56,58 +56,58 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
             />
           </motion.div>
           <span className="font-serif-luxury text-lg md:text-xl text-white tracking-tight hidden sm:block">Meridin & Co.<sup>™</sup></span>
-      </div>
+        </a>
 
-      <div className="flex items-center gap-4 md:gap-10">
-        <ul className="hidden lg:flex items-center gap-8 text-[10px] text-zinc-500 font-bold uppercase tracking-[0.3em]">
-          {navItems.map((item) => (
-            <li key={item.id} className="relative group">
-              <a
-                href={`/${item.id}`}
-                onClick={(e) => { e.preventDefault(); onNavigate(item.id); }}
-                className={`hover:text-white transition-colors duration-500 ${currentPage === item.id ? 'text-white' : ''}`}
-              >
-                {item.label}
-              </a>
-              {currentPage === item.id && (
-                <motion.div
-                  layoutId="nav-underline"
-                  className="absolute -bottom-1 left-0 w-full h-[1px] bg-white opacity-40"
-                />
-              )}
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-4 md:gap-6">
-          <button
-            onClick={onOpenCart}
-            className="relative p-2 group"
-          >
-            <div className="text-[10px] font-bold text-white/40 group-hover:text-white transition-colors uppercase tracking-widest hidden md:block mr-8">Your Cart</div>
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center">
-              <AnimatePresence mode="popLayout">
-                <motion.div
-                  key={cartItemCount}
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.5, opacity: 0 }}
-                  className={`w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center text-[9px] font-bold border ${cartItemCount > 0 ? 'bg-white text-black border-white' : 'border-white/20 text-white/20'}`}
+        <div className="flex items-center gap-4 md:gap-10">
+          <ul className="hidden lg:flex items-center gap-8 text-[10px] text-zinc-500 font-bold uppercase tracking-[0.3em]">
+            {navItems.map((item) => (
+              <li key={item.id} className="relative group">
+                <a
+                  href={`/${item.id}`}
+                  onClick={(e) => { e.preventDefault(); onNavigate(item.id); }}
+                  className={`hover:text-white transition-colors duration-500 ${currentPage === item.id ? 'text-white' : ''}`}
                 >
-                  {cartItemCount}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </button>
-          <button
-            onClick={() => onNavigate('contact')}
-            className="pill-button px-6 py-3 text-[9px] md:text-[10px] hidden sm:block"
-          >
-            Buy Now!
-          </button>
+                  {item.label}
+                </a>
+                {currentPage === item.id && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="absolute -bottom-1 left-0 w-full h-[1px] bg-white opacity-40"
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-4 md:gap-6">
+            <button
+              onClick={onOpenCart}
+              className="relative p-2 group"
+            >
+              <div className="text-[10px] font-bold text-white/40 group-hover:text-white transition-colors uppercase tracking-widest hidden md:block mr-8">Your Cart</div>
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center">
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={cartItemCount}
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
+                    className={`w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center text-[9px] font-bold border ${cartItemCount > 0 ? 'bg-white text-black border-white' : 'border-white/20 text-white/20'}`}
+                  >
+                    {cartItemCount}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </button>
+            <button
+              onClick={() => onNavigate('contact')}
+              className="pill-button px-6 py-3 text-[9px] md:text-[10px] hidden sm:block"
+            >
+              Buy Now!
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     </motion.nav >
   );
 };
