@@ -107,18 +107,20 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="pt-10 md:pt-16 flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-8"
         >
-          <button
-            className="pill-button px-10 py-5"
-            onClick={() => onNavigate('free-report')}
+          <a
+            href="/free-report"
+            className="pill-button px-10 py-5 inline-block"
+            onClick={(e) => { e.preventDefault(); onNavigate('free-report'); }}
           >
             Get Free Security Audit
-          </button>
-          <button
-            className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.6em] text-white/30 hover:text-white transition-all duration-700 underline underline-offset-[16px] decoration-white/10 hover:decoration-white"
-            onClick={() => onNavigate('pricing')}
+          </a>
+          <a
+            href="/pricing"
+            className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.6em] text-white/30 hover:text-white transition-all duration-700 underline underline-offset-[16px] decoration-white/10 hover:decoration-white inline-block"
+            onClick={(e) => { e.preventDefault(); onNavigate('pricing'); }}
           >
             Monthly Support
-          </button>
+          </a>
         </motion.div>
 
         <motion.div

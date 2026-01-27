@@ -186,12 +186,13 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onNavigate }) => {
               <p className="text-zinc-500 text-base leading-relaxed max-w-xs italic text-left">Regular support plans for small businesses and individuals.</p>
             </div>
             <div className="pt-12 uppercase text-left">
-              <button
-                onClick={() => onNavigate('pricing')}
-                className="pill-button px-8 py-4 text-[9px]"
+              <a
+                href="/pricing"
+                onClick={(e) => { e.preventDefault(); onNavigate('pricing'); }}
+                className="pill-button px-8 py-4 text-[9px] inline-block"
               >
                 View Plans &rarr;
-              </button>
+              </a>
             </div>
           </motion.div>
 
@@ -208,12 +209,13 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onNavigate }) => {
               <p className="text-zinc-500 text-base leading-relaxed max-w-xs italic text-left">Identify immediate risks with a standalone professional assessment.</p>
             </div>
             <div className="pt-12 text-left">
-              <button
-                onClick={() => onNavigate('marketplace')}
-                className="pill-button px-8 py-4 text-[9px] bg-transparent border border-white/20 hover:bg-white/10 text-white"
+              <a
+                href="/marketplace"
+                onClick={(e) => { e.preventDefault(); onNavigate('marketplace'); }}
+                className="pill-button px-8 py-4 text-[9px] bg-transparent border border-white/20 hover:bg-white/10 text-white inline-block"
               >
                 View Services &rarr;
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -240,12 +242,13 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onNavigate }) => {
             </p>
           </div>
           <div className="pt-8">
-            <button
-              className="pill-button px-12 py-6 text-[11px]"
-              onClick={() => onNavigate('free-report')}
+            <a
+              href="/free-report"
+              className="pill-button px-12 py-6 text-[11px] inline-block"
+              onClick={(e) => { e.preventDefault(); onNavigate('free-report'); }}
             >
               Get Free Exposure Report
-            </button>
+            </a>
             <p className="text-[8px] text-zinc-800 uppercase tracking-[0.4em] mt-8">Professional Review • 24hr Turnaround</p>
           </div>
         </motion.div>
