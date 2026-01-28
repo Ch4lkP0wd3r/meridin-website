@@ -108,6 +108,6 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
           </div>
         </div>
       </div>
-    </motion.nav >
+    </motion.nav>
   );
 };
