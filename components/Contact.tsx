@@ -9,26 +9,25 @@ export const Contact: React.FC = () => {
     setFormStatus('sending');
 
     const formData = new FormData(e.currentTarget);
-    // FormSubmit specific settings
-    formData.append("_captcha", "false");
-    formData.append("_template", "box");
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
 
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/support@meridin.co.in", {
-        method: "POST",
-        body: formData
-      });
+    // Simulate sending delay for effect
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
-      const data = await response.json();
+    const subject = encodeURIComponent(`Contact Request: ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\n` +
+      `Email: ${email}\n\n` +
+      `Request:\n${message}`
+    );
 
-      if (data.success === "true" || response.ok) {
-        setFormStatus('sent');
-      } else {
-        setFormStatus('error');
-      }
-    } catch (error) {
-      setFormStatus('error');
-    }
+    // Show success screen
+    setFormStatus('sent');
+
+    // Redirect to mail app
+    window.location.href = `mailto:support@meridin.co.in?subject=${subject}&body=${body}`;
   };
 
   return (

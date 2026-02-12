@@ -31,6 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <li><a href="/" onClick={(e) => { e.preventDefault(); onNavigate('home'); }} className="hover:text-white transition-colors">Home</a></li>
             <li><a href="/services" onClick={(e) => { e.preventDefault(); onNavigate('services'); }} className="hover:text-white transition-colors">Services</a></li>
             <li><a href="/free-audit" onClick={(e) => { e.preventDefault(); onNavigate('free-report'); }} className="hover:text-white transition-colors">Free Audit</a></li>
+            <li><a href="/victim-support" onClick={(e) => { e.preventDefault(); onNavigate('victim-support'); }} className="hover:text-white transition-colors">Victim Support</a></li>
             <li><a href="/marketplace" onClick={(e) => { e.preventDefault(); onNavigate('marketplace'); }} className="hover:text-white transition-colors">One-time Services</a></li>
             <li><a href="/pricing" onClick={(e) => { e.preventDefault(); onNavigate('pricing'); }} className="hover:text-white transition-colors">Monthly Plans</a></li>
             <li><a href="/contact" onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} className="hover:text-white transition-colors">Contact</a></li>

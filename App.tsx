@@ -13,8 +13,9 @@ import { CartDrawer } from './components/CartDrawer';
 import { Marketplace } from './components/Marketplace';
 import { Labs } from './components/Labs';
 import { NotFoundError } from './components/NotFoundError';
+import { VictimSupport } from './components/VictimSupport';
 
-export type Page = 'home' | 'pricing' | 'services' | 'contact' | 'free-report' | 'marketplace' | 'payment-success' | 'payment-cancel';
+export type Page = 'home' | 'pricing' | 'services' | 'contact' | 'free-report' | 'marketplace' | 'victim-support' | 'payment-success' | 'payment-cancel';
 
 export interface Plan {
   name: string;
@@ -102,6 +103,12 @@ const App: React.FC = () => {
         return (
           <div className="animate-fade">
             <Contact />
+          </div>
+        );
+      case 'victim-support':
+        return (
+          <div className="animate-fade">
+            <VictimSupport />
           </div>
         );
       case 'payment-success':

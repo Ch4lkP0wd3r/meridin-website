@@ -24,9 +24,10 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
   const navItems = [
     { label: 'Home', id: 'home' as Page },
     { label: 'Services', id: 'services' as Page },
-    { label: 'Free Audit', id: 'free-report' as Page },
-    { label: 'One-time Services', id: 'marketplace' as Page },
-    { label: 'Monthly Plans', id: 'pricing' as Page },
+    { label: 'Audit', id: 'free-report' as Page },
+    { label: 'Support', id: 'victim-support' as Page },
+    { label: 'Marketplace', id: 'marketplace' as Page },
+    { label: 'Pricing', id: 'pricing' as Page },
     { label: 'Contact', id: 'contact' as Page },
   ];
 
@@ -58,8 +59,8 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
           <span className="font-serif-luxury text-lg md:text-xl text-white tracking-tight hidden sm:block">Meridin & Co.<sup>™</sup></span>
         </a>
 
-        <div className="flex items-center gap-4 md:gap-10">
-          <ul className="hidden lg:flex items-center gap-8 text-[10px] text-zinc-500 font-bold uppercase tracking-[0.3em]">
+        <div className="flex items-center gap-4 md:gap-8">
+          <ul className="hidden lg:flex items-center gap-6 text-[10px] text-zinc-500 font-bold uppercase tracking-[0.25em]">
             {navItems.map((item) => (
               <li key={item.id} className="relative group">
                 <a
@@ -84,7 +85,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
               onClick={onOpenCart}
               className="relative p-2 group"
             >
-              <div className="text-[10px] font-bold text-white/40 group-hover:text-white transition-colors uppercase tracking-widest hidden md:block mr-8">Your Cart</div>
+              <div className="text-[10px] font-bold text-white/40 group-hover:text-white transition-colors uppercase tracking-widest hidden md:block mr-4">Cart</div>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center">
                 <AnimatePresence mode="popLayout">
                   <motion.div
@@ -99,6 +100,22 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate,
                 </AnimatePresence>
               </div>
             </button>
+            <a
+              href="https://academy.meridin.co.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] font-bold text-white/40 hover:text-white transition-colors uppercase tracking-widest hidden lg:flex items-center gap-2 group/academy"
+            >
+              Academy
+              <svg
+                className="w-3 h-3 translate-y-[-1px] group-hover/academy:translate-x-0.5 group-hover/academy:translate-y-[-1.5px] transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
             <button
               onClick={() => onNavigate('contact')}
               className="pill-button px-6 py-3 text-[9px] md:text-[10px] hidden sm:block"
