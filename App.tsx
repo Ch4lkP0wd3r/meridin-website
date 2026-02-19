@@ -8,14 +8,13 @@ import { Services } from './components/Services';
 import { ReconReports } from './components/ReconReports';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { Checkout } from './components/Checkout';
 import { CartDrawer } from './components/CartDrawer';
 import { Marketplace } from './components/Marketplace';
 import { Labs } from './components/Labs';
 import { NotFoundError } from './components/NotFoundError';
 import { VictimSupport } from './components/VictimSupport';
 
-export type Page = 'home' | 'pricing' | 'services' | 'contact' | 'free-report' | 'marketplace' | 'victim-support' | 'payment-success' | 'payment-cancel';
+export type Page = 'home' | 'pricing' | 'services' | 'contact' | 'free-report' | 'marketplace' | 'victim-support';
 
 export interface Plan {
   name: string;
@@ -29,7 +28,7 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [cartItems, setCartItems] = useState<Plan[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  // const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   // Reveal On Scroll Logic
   useEffect(() => {
@@ -111,32 +110,7 @@ const App: React.FC = () => {
             <VictimSupport />
           </div>
         );
-      case 'payment-success':
-        return (
-          <div className="animate-fade min-h-[80vh] flex flex-col items-center justify-center text-center px-6">
-            <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mb-8">
-              <span className="text-white text-3xl">✓</span>
-            </div>
-            <h2 className="font-serif-luxury text-4xl md:text-6xl text-white italic mb-4">Transaction Confirmed.</h2>
-            <p className="text-zinc-500 text-lg md:text-xl font-light max-w-lg mb-12 italic">
-              Thank you for trusting Meridin & Co<sup>™</sup>. Your secure intelligence setup is now underway. Our team will contact you shortly.
-            </p>
-            <button onClick={() => setCurrentPage('home')} className="pill-button px-12 py-5">Return Home &rarr;</button>
-          </div>
-        );
-      case 'payment-cancel':
-        return (
-          <div className="animate-fade min-h-[80vh] flex flex-col items-center justify-center text-center px-6">
-            <div className="w-20 h-20 bg-red-900/10 border border-red-500/20 rounded-full flex items-center justify-center mb-8">
-              <span className="text-red-500 text-3xl">!</span>
-            </div>
-            <h2 className="font-serif-luxury text-4xl md:text-6xl text-white italic mb-4">Process Aborted.</h2>
-            <p className="text-zinc-500 text-lg md:text-xl font-light max-w-lg mb-12 italic">
-              The payment process was cancelled. No charges were made. If you need assistance, please contact our support team.
-            </p>
-            <button onClick={() => setCurrentPage('home')} className="pill-button px-12 py-5 bg-transparent border border-white/20 text-white">Return Home &rarr;</button>
-          </div>
-        );
+        return <NotFoundError onNavigate={setCurrentPage} />;
       default:
         return <NotFoundError onNavigate={setCurrentPage} />;
     }
@@ -162,16 +136,9 @@ const App: React.FC = () => {
         onRemove={removeFromCart}
         onCheckout={() => {
           setIsCartOpen(false);
-          setIsCheckoutOpen(true);
+          setCurrentPage('contact');
         }}
       />
-
-      {isCheckoutOpen && cartItems.length > 0 && (
-        <Checkout
-          items={cartItems}
-          onClose={() => setIsCheckoutOpen(false)}
-        />
-      )}
 
       <Footer onNavigate={setCurrentPage} />
     </div>

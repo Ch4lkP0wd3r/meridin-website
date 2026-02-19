@@ -25,7 +25,7 @@ A holistic approach to privacy engineering, ensuring that your sensitive informa
 
 ## Client Engagement & Secure Protocols
 - **Seamless Onboarding**: Every engagement begins with a confidential assessment to tailor our protocols to your specific needs.
-- **Secured Transactions**: To maintain absolute client anonymity, we utilize established cryptographic settlement layers (BTC, XMR, ETH).
+- **Direct Consultation**: We maintain client confidentiality through established secure communication channels and relationship-based engagements.
 - **Global Availability**: Our rapid-response team is operational across all time zones to support your most critical security requirements.
 
 ## Reference Points & Resources

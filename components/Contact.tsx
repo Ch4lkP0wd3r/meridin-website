@@ -43,7 +43,7 @@ export const Contact: React.FC = () => {
             </div>
 
             <p className="text-[#888] font-light text-lg md:text-xl leading-relaxed max-w-sm mx-auto lg:mx-0 italic">
-              "We operate exclusively in digital assets. All consultations and services are transacted via secure cryptocurrency protocols."
+              "We provide high-impact security solutions for high-stakes environments. Professionalism and discretion are our core values."
             </p>
 
             <div className="space-y-8 md:space-y-10 pt-8 md:pt-10 border-t border-white/5">
@@ -101,8 +101,8 @@ export const Contact: React.FC = () => {
                 )}
 
                 <div className="flex items-center justify-center gap-3 opacity-30">
-                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
-                  <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] text-white">Cryptographic Channel Only</p>
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                  <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] text-white">Direct Support Inquiry</p>
                 </div>
               </form>
             )}

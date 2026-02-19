@@ -61,7 +61,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, 
           {items.length > 0 && (
             <div className="mt-10 pt-10 border-t border-white/5 space-y-10">
               <div className="flex justify-between items-center">
-                <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.4em]">Total Cost</span>
+                <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.4em]">Estimated Cost</span>
                 <span className="text-2xl font-serif-luxury text-white">
                   ${total.toLocaleString()}
                 </span>
@@ -70,7 +70,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, 
                 onClick={onCheckout}
                 className="w-full pill-button py-6 text-sm"
               >
-                Proceed to Checkout
+                Request Access &rarr;
               </button>
             </div>
           )}
