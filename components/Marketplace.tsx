@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Plan } from '../App';
+import { RazorpayCheckout } from './RazorpayCheckout';
 
 const onDemandServices = [
     {
@@ -68,8 +69,27 @@ export const Marketplace: React.FC<MarketplaceProps> = ({ onAddToCart }) => {
         setTimeout(() => setStagedId(null), 2000);
     };
 
+    const handlePaymentSuccess = (paymentDetails: any) => {
+        console.log('Payment successful:', paymentDetails);
+        alert('Payment successful! Thank you for your purchase.');
+    };
+
+    const handlePaymentError = (error: string) => {
+        console.error('Payment error:', error);
+        alert(error);
+    };
+
+    const handlePaymentCancel = () => {
+        console.log('Payment cancelled');
+    };
+
+    const convertPriceToPaise = (price: string): number => {
+        const numericValue = parseFloat(price.replace(/[^0-9.]/g, ''));
+        return Math.round(numericValue * 100);
+    };
+
     return (
-        <section id="marketplace" className="py-24 md:py-48 bg-[#050505]">
+        <section id="marketplace" data-scroll-offset className="py-24 md:py-48 bg-[#050505]">
             <div className="max-w-[1300px] mx-auto px-6 md:px-10">
                 <div className="reveal mb-20 md:mb-32">
                     <span className="text-[10px] md:text-[11px] font-bold text-white/30 tracking-widest uppercase block mb-6">Service List</span>
@@ -105,17 +125,30 @@ export const Marketplace: React.FC<MarketplaceProps> = ({ onAddToCart }) => {
                             </div>
 
                             <div className="pt-12">
-                                <button
-                                    onClick={() => handleAdd(s)}
-                                    className={`w-full py-5 md:py-6 rounded-full text-[10px] font-bold tracking-[0.4em] uppercase transition-all duration-500 relative overflow-hidden ${stagedId === s.id ? 'bg-white text-black' : 'bg-white/5 text-white/30 hover:text-white hover:bg-white/10'}`}
-                                >
-                                    <span className={`transition-all duration-500 block ${stagedId === s.id ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}>
-                                        Select Service
-                                    </span>
-                                    <span className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${stagedId === s.id ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                                        Added to List
-                                    </span>
-                                </button>
+                                {import.meta.env.VITE_RAZORPAY_KEY_ID ? (
+                                  <RazorpayCheckout
+                                    amount={convertPriceToPaise(s.price)}
+                                    currency="INR"
+                                    description={`${s.name} - One-time Service`}
+                                    onPaymentSuccess={handlePaymentSuccess}
+                                    onPaymentError={handlePaymentError}
+                                    onPaymentCancel={handlePaymentCancel}
+                                    buttonText="Select Service"
+                                    loadingText="Processing..."
+                                  />
+                                ) : (
+                                  <button
+                                      onClick={() => handleAdd(s)}
+                                      className={`w-full py-5 md:py-6 rounded-full text-[10px] font-bold tracking-[0.4em] uppercase transition-all duration-500 relative overflow-hidden ${stagedId === s.id ? 'bg-white text-black' : 'bg-white/5 text-white/30 hover:text-white hover:bg-white/10'}`}
+                                  >
+                                      <span className={`transition-all duration-500 block ${stagedId === s.id ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}>
+                                          Select Service
+                                      </span>
+                                      <span className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${stagedId === s.id ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                                          Added to List
+                                      </span>
+                                  </button>
+                                )}
                             </div>
                         </div>
                     ))}

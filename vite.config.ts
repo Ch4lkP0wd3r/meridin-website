@@ -8,11 +8,18 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 6767,
       host: '0.0.0.0',
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3001',
+          changeOrigin: true,
+        },
+      },
     },
     plugins: [react()],
     define: {
       'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.VITE_RAZORPAY_KEY_ID': JSON.stringify(env.RAZORPAY_KEY_ID),
     },
     resolve: {
       alias: {

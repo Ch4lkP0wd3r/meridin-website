@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Plan } from '../App';
+import { RazorpayCheckout } from './RazorpayCheckout';
 
 const plans = [
   {
@@ -79,8 +80,29 @@ export const Pricing: React.FC<PricingProps> = ({ onAddToCart }) => {
     }, 2000);
   };
 
+  const handlePaymentSuccess = (paymentDetails: any) => {
+    console.log('Payment successful:', paymentDetails);
+    // Handle successful payment - could redirect, show confirmation, etc.
+    alert('Payment successful! Thank you for your purchase.');
+  };
+
+  const handlePaymentError = (error: string) => {
+    console.error('Payment error:', error);
+    alert(error);
+  };
+
+  const handlePaymentCancel = () => {
+    console.log('Payment cancelled');
+  };
+
+  const convertPriceToPaise = (price: string): number => {
+    // Extract numeric value from price string like "$59" or "59"
+    const numericValue = parseFloat(price.replace(/[^0-9.]/g, ''));
+    return Math.round(numericValue * 100); // Convert to paise
+  };
+
   return (
-    <section id="pricing" className="py-24 md:py-48 bg-black min-h-screen">
+    <section id="pricing" data-scroll-offset className="py-24 md:py-48 bg-black min-h-screen">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         <div className="reveal mb-16 md:mb-32">
           <span className="text-[10px] md:text-[11px] font-bold text-white/30 tracking-widest uppercase block mb-6">Security Plans</span>
@@ -126,17 +148,30 @@ export const Pricing: React.FC<PricingProps> = ({ onAddToCart }) => {
               </div>
 
               <div className="pt-8 md:pt-12">
-                <button
-                  onClick={() => handleAdd(p)}
-                  className={`w-full py-4 md:py-6 rounded-2xl text-[10px] md:text-[11px] font-bold tracking-[0.4em] uppercase transition-all duration-500 overflow-hidden relative ${p.featured ? 'bg-white text-black' : 'bg-[#151515] text-zinc-400 border border-white/5 hover:border-white/20'}`}
-                >
-                  <span className={`transition-all duration-500 block ${addedIds.has(p.id) ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}>
-                    {p.btnText}
-                  </span>
-                  <span className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${addedIds.has(p.id) ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                    Added to List
-                  </span>
-                </button>
+                {import.meta.env.VITE_RAZORPAY_KEY_ID ? (
+                  <RazorpayCheckout
+                    amount={convertPriceToPaise(p.price)}
+                    currency="INR"
+                    description={`${p.name} Plan - Monthly Support`}
+                    onPaymentSuccess={handlePaymentSuccess}
+                    onPaymentError={handlePaymentError}
+                    onPaymentCancel={handlePaymentCancel}
+                    buttonText={p.btnText}
+                    loadingText="Processing..."
+                  />
+                ) : (
+                  <button
+                    onClick={() => handleAdd(p)}
+                    className={`w-full py-4 md:py-6 rounded-2xl text-[10px] md:text-[11px] font-bold tracking-[0.4em] uppercase transition-all duration-500 overflow-hidden relative ${p.featured ? 'bg-white text-black' : 'bg-[#151515] text-zinc-400 border border-white/5 hover:border-white/20'}`}
+                  >
+                    <span className={`transition-all duration-500 block ${addedIds.has(p.id) ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}>
+                      {p.btnText}
+                    </span>
+                    <span className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${addedIds.has(p.id) ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                      Added to List
+                    </span>
+                  </button>
+                )}
               </div>
             </div>
           ))}
